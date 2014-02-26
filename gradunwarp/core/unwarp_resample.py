@@ -183,7 +183,7 @@ class Unwarper(object):
         # do the nonlinear unwarp
         if use_hcp_siemens:
             self.out, self.vjacout = self.non_linear_unwarp_siemens(self.vol.shape, dv, dxyz,
-                                                                 m_rcs2lai, m_rcs2lai, g_xyz2rcs)
+                                                                 m_rcs2lai, g_xyz2rcs)
         else:
             self.out, self.vjacmult_lps = self.non_linear_unwarp(vxyz, grcs, dv, dxyz,
                                                                  m_rcs2lai, g_xyz2rcs)
@@ -312,7 +312,7 @@ class Unwarper(object):
         if self.vendor == 'ge':
             pass  # for now
 
-    def non_linear_unwarp_siemens(self, volshape, dv, dxyz, m_rcs2lai, m_rcs2lai, g_xyz2rcs):
+    def non_linear_unwarp_siemens(self, volshape, dv, dxyz, m_rcs2lai, g_xyz2rcs):
         ''' Performs the crux of the unwarping.
         It's agnostic to Siemens or GE and uses more functions to
         do the processing separately.
