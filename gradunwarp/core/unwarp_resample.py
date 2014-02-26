@@ -27,13 +27,14 @@ log = logging.getLogger('gradunwarp')
 class Unwarper(object):
     '''
     '''
-    def __init__(self, vol, m_rcs2ras, vendor, coeffs):
+    def __init__(self, vol, m_rcs2ras, vendor, coeffs, fileName=None):
         '''
         '''
         self.vol = vol
         self.m_rcs2ras = m_rcs2ras
         self.vendor = vendor
         self.coeffs = coeffs
+        self.name=fileName
         self.warp = False
         self.nojac = False
         self.m_rcs2lai = None
@@ -94,7 +95,6 @@ class Unwarper(object):
         _dv, _dxyz = eval_spherical_harmonics(coeffs, vendor, gvxyz)
             
         return CV(_dv.x, _dv.y, _dv.z), CV(gr, gc, gs), g_xyz2rcs
-
 
     def run(self):
         '''
