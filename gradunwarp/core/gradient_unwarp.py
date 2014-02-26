@@ -47,6 +47,8 @@ def argument_parse_gradunwarp():
                    help='number of grid points in each direction')
     p.add_argument('--interp_order', dest='order',
                    help='the order of interpolation(1..4) where 1 is linear - default')
+    p.add_argument('--hcp', dest='hcp', action='store_true', default=False,
+                   help='if true, and infile is provided, and vendor is siemens, try to use non_linear_unwarp_siemens.')
 
     p.add_argument('--verbose', action='store_true', default=False)
 
@@ -96,7 +98,7 @@ class GradientUnwarpRunner(object):
         self.vol, self.m_rcs2ras = utils.get_vol_affine(self.args.infile)
 
         self.unwarper = Unwarper(self.vol, self.m_rcs2ras, self.args.vendor,
-                                 self.coeffs, getattr(self.args, 'infile', None))
+                                 self.coeffs, self.args.infile, self.args.hcp)
         if hasattr(self.args, 'fovmin') and self.args.fovmin:
             self.unwarper.fovmin = float(self.args.fovmin)
         if hasattr(self.args, 'fovmax') and self.args.fovmax:
