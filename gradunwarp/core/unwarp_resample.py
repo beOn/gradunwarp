@@ -181,10 +181,12 @@ class Unwarper(object):
 
     def write(self, outfile):
         log.info('Writing output to ' + outfile)
+        # if out datatype is float64 make it float32
+        if self.out.dtype == np.float64:
+            self.out = self.out.astype(np.float32)
         if outfile.endswith('.nii') or outfile.endswith('.nii.gz'):
             img = nib.Nifti1Image(self.out, self.m_rcs2ras)
         if outfile.endswith('.mgh') or outfile.endswith('.mgz'):
-            self.out = self.out.astype(np.float32)
             img = nib.MGHImage(self.out, self.m_rcs2ras)
         nib.save(img, outfile)
 
