@@ -7,6 +7,7 @@
 import numpy as np
 import sys
 import pdb
+import gc
 import math
 import logging
 from scipy import ndimage
@@ -16,6 +17,7 @@ from utils import factorial
 import globals
 from globals import siemens_max_det
 import nibabel as nib
+import subprocess
 
 #np.seterr(all='raise')
 
