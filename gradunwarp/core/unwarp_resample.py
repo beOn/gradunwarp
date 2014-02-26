@@ -172,7 +172,6 @@ class Unwarper(object):
             dvz[..., slice] = moddv.z
             '''
 
-        print
         # Evaluate spherical harmonics on a smaller grid 
         dv, grcs, g_xyz2rcs = self.eval_spharm_grid(self.vendor, self.coeffs)
         # do the nonlinear unwarp
